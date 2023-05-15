@@ -14,7 +14,7 @@ dotenv.config()
     
     
     mongoose.connection.on('error',()=>{
-        console.log('Error While Connecting',error.message);
+        console.log('Error While Connecting');
     })
     
 }
