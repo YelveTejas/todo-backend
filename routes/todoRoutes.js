@@ -2,7 +2,7 @@ import express from 'express'
 import Todomodel from '../Model/todoModel.js'
 const route = express()
 route.post('/todos',async(req,res)=>{
- 
+
     try{
         const newTodo = await Todomodel.create({
             data:req.body.data,
@@ -31,14 +31,17 @@ route.get('/todos',async(req,res)=>{
 
 route.get('/todos/:id',async(req,res)=>{
   try{
+    
   const todoRef= await Todomodel.findById(req.params.id)
+ 
   const todo = await Todomodel.findOneAndUpdate(
     {_id:req.params.id},
     {done:!todoRef.done}
     )
 
     await todo.save()
-      res.status(200).json(todo)
+  
+      res.send(todo)
      }catch(err){
       console.log(err)
      }
